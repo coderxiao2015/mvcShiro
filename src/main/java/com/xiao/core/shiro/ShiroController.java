@@ -48,4 +48,16 @@ public class ShiroController {
         return modelAndView;
     }
 
+
+    /*测试跳转到下一个页面是否能继续使用权限*/
+    @RequestMapping("/userInfo")
+    public ModelAndView goUserInfo(){
+        //获取用户的信息
+        UserEntity userEntity=(UserEntity) SecurityUtils.getSubject().getPrincipal();
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("/user/userInfo");
+        /*modelAndView.addObject("user",userEntity);*/
+        return modelAndView;
+    }
+
 }

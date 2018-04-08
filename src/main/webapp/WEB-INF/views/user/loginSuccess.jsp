@@ -22,5 +22,9 @@
     <shiro:hasPermission name="select">
        查询
     </shiro:hasPermission>
-</body>
+
+<%--登录完成跳转到下一个页面--%>
+<a href="/shiro/userInfo">用户页面</a>
+
+
 </html>

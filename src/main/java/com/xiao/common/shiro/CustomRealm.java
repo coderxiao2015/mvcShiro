@@ -57,14 +57,16 @@ public class CustomRealm extends AuthorizingRealm {
             throw new LockedAccountException(); //帐号锁定
         }*/
 
-        //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以在此判断或自定义实现
+        //创建认证后的实例，将用户的实体存放到princple中，供系统中其他方法调用subject.getPrincple 获取数据
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                userEntity.getLoginName(), //用户名
-                userEntity.getPassword(), //密码
+                userEntity, //用户实体
+                password, //密码
                 //ByteSource.Util.bytes(userEntity.getCredentialsSalt()),//salt=username+salt
                 null,
                 getName()  //realm name
         );
+
+
 
 
         return authenticationInfo;
@@ -78,12 +80,12 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        String loginName=(String)principals.getPrimaryPrincipal(); //用户名
+        UserEntity userEntity=(UserEntity) principals.getPrimaryPrincipal(); //用户名
         //根据用户名获取用户的角色
-        ArrayList<String> roles=shiroService.getUserRoles(loginName);
+        ArrayList<String> roles=shiroService.getUserRoles(userEntity.getLoginName());
         authorizationInfo.addRoles(roles);
         //根据角色获取用户的权限码
-        HashSet<String> permissions=shiroService.getUserPermission(loginName);
+        HashSet<String> permissions=shiroService.getUserPermission(userEntity.getLoginName());
         authorizationInfo.addStringPermissions(permissions);
         return authorizationInfo;
     }

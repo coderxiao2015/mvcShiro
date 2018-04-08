@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>登录成功</title>
+    <title>用户信息</title>
 </head>
 <body>
     用户权限
-    <shiro:hasPermission name="create">
+   <shiro:hasPermission name="create">
         创建
     </shiro:hasPermission>
 
@@ -22,9 +22,6 @@
     <shiro:hasPermission name="select">
        查询
     </shiro:hasPermission>
-
-<%--登录完成跳转到下一个页面--%>
-<a href="/shiro/userInfo">用户页面</a>
 
 
 </html>
