@@ -1,0 +1,8 @@
+com\xiao\core\shiro\ShiroServiceImpl.class
+com\xiao\common\shiro\CustomRealm.class
+com\xiao\Filter\shiroRightFilter.class
+com\xiao\core\shiro\ShiroController.class
+com\xiao\test\ShiroIdentify.class
+com\xiao\core\shiro\dao\ShiroDao.class
+com\xiao\core\shiro\UserEntity.class
+com\xiao\core\shiro\ShiroService.class

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.core.shiro.dao.ShiroDao">
+
+	<resultMap id="user" type="user">
+		<id column="user_id" property="userId" jdbcType="VARCHAR"></id>
+		<result column="login_name" property="loginName" jdbcType="VARCHAR"></result>
+		<result column="password" property="password" jdbcType="VARCHAR"></result>
+	</resultMap>
+
+	<select id="getUserEntity" resultMap="user" parameterType="String">
+		select * from user  where login_name=#{0} and password=#{1}
+	</select>
+
+	<select id="getUserRoles" parameterType="String" resultType="String">
+		select role_code  from user us,user_role ur,role role
+		where us.user_id=ur.user_id and ur.user_role_id=role.role_id
+		and us.login_name=#{loginName}
+	</select>
+
+
+	<select id="getUserPermission" parameterType="String" resultType="String">
+		select per_code  from user us,user_role ur,role role,role_permission rp ,permission per
+		where us.user_id=ur.user_id and ur.user_role_id=role.role_id
+		and role.role_id=rp.role_id and rp.role_per_id=per.per_id
+		and us.login_name=#{loginName}
+	</select>
+
+
+
+
+
+
+
+
+</mapper>
