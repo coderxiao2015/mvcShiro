@@ -1,6 +1,9 @@
 package com.xiao.core.shiro;
 
-public class UserEntity {
+import java.io.Serializable;
+
+public class UserEntity implements Serializable {
+
 
     private String userId;
     private String loginName;

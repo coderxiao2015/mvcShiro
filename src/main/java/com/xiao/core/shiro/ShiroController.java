@@ -31,13 +31,16 @@ public class ShiroController {
         //获取主题
         Subject subject=SecurityUtils.getSubject();
 
-        //创建token
-        UsernamePasswordToken token=new UsernamePasswordToken();
-        token.setUsername(loginName);
-        token.setPassword(password.toCharArray());
+            //创建token
+            UsernamePasswordToken token=new UsernamePasswordToken();
+            token.setUsername(loginName);
+            token.setPassword(password.toCharArray());
 
-        //开始登录
-        subject.login(token);
+            //设置记住我
+            token.setRememberMe(true);
+            //开始登录
+            subject.login(token);
+
 
         //判断是否登录成功
         if(subject.isAuthenticated()){
